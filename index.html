@@ -1,0 +1,756 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090a0e">
+<meta name="description" content="YOSHA VOICE AI - Premium AI Voice Studio">
+<title>YOSHA VOICE AI</title>
+<link rel="manifest" href="/manifest.json">
+
+<style>
+:root {
+    --gold: #e5bd70;
+    --gold2: #bd8b3c;
+    --bg: #090a0e;
+    --panel: #15161c;
+    --muted: #92939b;
+    --border: #303039;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at top, #30230e 0%, #111116 35%, #08090d 75%);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    padding: 18px 14px 40px;
+}
+
+.container {
+    max-width: 650px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    padding: 30px 10px;
+}
+
+.logo {
+    color: var(--gold);
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 7px;
+    text-shadow: 0 0 25px #bd8b3c70;
+}
+
+.subtitle {
+    font-size: 13px;
+    letter-spacing: 8px;
+    margin-top: 8px;
+}
+
+.tagline {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 18px;
+    letter-spacing: 1px;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid #36363c;
+    border-radius: 30px;
+    padding: 8px 13px;
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 20px;
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    background: #d4a84e;
+    border-radius: 50%;
+}
+
+.panel {
+    background: rgba(21,22,28,.97);
+    border: 1px solid #bd8b3c40;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 15px 45px #0007;
+}
+
+.section-title {
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.8px;
+    margin-bottom: 17px;
+}
+
+.label {
+    display: block;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin: 18px 0 9px;
+}
+
+textarea, select {
+    width: 100%;
+    background: #0e0f14;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    outline: none;
+}
+
+textarea {
+    min-height: 155px;
+    line-height: 1.6;
+    resize: vertical;
+}
+
+textarea:focus, select:focus {
+    border-color: var(--gold);
+}
+
+select {
+    min-height: 47px;
+}
+
+.row {
+    display: flex;
+    gap: 12px;
+}
+
+.row > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.counter {
+    color: #777;
+    font-size: 11px;
+    text-align: right;
+    margin-top: 8px;
+}
+
+.range-wrap {
+    margin-top: 18px;
+}
+
+.range-head {
+    display: flex;
+    justify-content: space-between;
+    color: #aaa;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+input[type=range] {
+    width: 100%;
+    accent-color: var(--gold);
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 11px;
+    border: none;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 13px;
+}
+
+button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.primary {
+    background: linear-gradient(110deg,#a97828,#f0d28d,#bd8b3c);
+    color: #111;
+    box-shadow: 0 5px 20px #bd903b35;
+}
+
+.secondary {
+    background: #292a32;
+    border: 1px solid #42434b;
+    color: #fff;
+}
+
+.outline {
+    background: transparent;
+    border: 1px solid #44444c;
+    color: #aaa;
+}
+
+.message {
+    color: var(--gold);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+    min-height: 18px;
+    line-height: 1.5;
+}
+
+.audio-box {
+    background: #101116;
+    border: 1px solid #383840;
+    border-radius: 14px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.audio-box audio {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.history-item {
+    background: #101116;
+    border: 1px solid #303039;
+    border-radius: 11px;
+    padding: 12px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.history-text {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.history-text strong {
+    color: var(--gold);
+    font-size: 12px;
+}
+
+.history-text p {
+    color: #888;
+    font-size: 11px;
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.history-item a {
+    color: var(--gold);
+    font-size: 11px;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.footer {
+    text-align: center;
+    color: #666;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 20px;
+}
+
+.small-note {
+    color: #777;
+    font-size: 11px;
+    line-height: 1.6;
+    margin-top: 12px;
+}
+
+@media(max-width:380px) {
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header class="header">
+    <div class="logo">YOSHA</div>
+    <div class="subtitle">VOICE AI</div>
+    <div class="tagline">YOUR TEXT. YOUR VOICE. YOUR WORLD.</div>
+
+    <div class="status-pill">
+        <span class="dot"></span>
+        <span id="connection">CONNECTING TO YOSHA...</span>
+    </div>
+</header>
+
+<section class="panel">
+    <div class="section-title">01 / TEXT STUDIO</div>
+
+    <label class="label" for="textInput">YOUR SCRIPT</label>
+
+    <textarea id="textInput"
+        maxlength="5000"
+        placeholder="Write or paste your script here..."></textarea>
+
+    <div class="counter" id="counter">0 / 5000</div>
+
+    <div class="row">
+        <div>
+            <label class="label" for="languageFilter">LANGUAGE FILTER</label>
+            <select id="languageFilter">
+                <option value="all">All voices</option>
+                <option value="en">English</option>
+                <option value="ar">Arabic</option>
+                <option value="fr">French</option>
+                <option value="es">Spanish</option>
+                <option value="de">German</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="label" for="voiceSelect">AI VOICE</label>
+            <select id="voiceSelect">
+                <option value="">Loading voices...</option>
+            </select>
+        </div>
+    </div>
+
+    <button class="outline" id="previewVoice">
+        PREVIEW SELECTED VOICE
+    </button>
+
+    <label class="label" for="modelSelect">AI MODEL</label>
+    <select id="modelSelect">
+        <option value="eleven_multilingual_v2">
+            Multilingual V2 - Natural quality
+        </option>
+        <option value="eleven_flash_v2_5">
+            Flash V2.5 - Faster generation
+        </option>
+    </select>
+</section>
+
+<section class="panel">
+    <div class="section-title">02 / VOICE SETTINGS</div>
+
+    <div class="range-wrap">
+        <div class="range-head">
+            <span>SPEECH SPEED</span>
+            <strong id="speedValue">1.00</strong>
+        </div>
+        <input id="speed" type="range"
+            min="0.7" max="1.2" step="0.05" value="1">
+    </div>
+
+    <div class="range-wrap">
+        <div class="range-head">
+            <span>VOICE STABILITY</span>
+            <strong id="stabilityValue">0.50</strong>
+        </div>
+        <input id="stability" type="range"
+            min="0" max="1" step="0.05" value="0.5">
+    </div>
+
+    <div class="range-wrap">
+        <div class="range-head">
+            <span>VOICE SIMILARITY</span>
+            <strong id="similarityValue">0.75</strong>
+        </div>
+        <input id="similarity" type="range"
+            min="0" max="1" step="0.05" value="0.75">
+    </div>
+
+    <button class="primary" id="generateButton">
+        GENERATE AI VOICE
+    </button>
+
+    <div class="message" id="message">
+        READY TO CREATE YOUR VOICE
+    </div>
+</section>
+
+<section class="panel">
+    <div class="section-title">03 / AUDIO PLAYER</div>
+
+    <div id="audioArea">
+        <p class="small-note">
+            Your generated audio will appear here.
+        </p>
+    </div>
+</section>
+
+<section class="panel">
+    <div class="section-title">04 / RECENT GENERATIONS</div>
+    <div id="history">
+        <p class="small-note">No recent generations yet.</p>
+    </div>
+
+    <button class="outline" id="clearHistory">
+        CLEAR HISTORY
+    </button>
+</section>
+
+<footer class="footer">
+    POWERED BY YOSHA AI<br><br>
+    VERSION 1.0
+</footer>
+
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+let voices = [];
+let currentAudioURL = null;
+let currentAudio = null;
+
+function setMessage(text) {
+    $("message").textContent = text;
+}
+
+function updateCounter() {
+    $("counter").textContent =
+        $("textInput").value.length + " / 5000";
+}
+
+$("textInput").addEventListener("input", updateCounter);
+
+function updateRanges() {
+    $("speedValue").textContent =
+        Number($("speed").value).toFixed(2);
+
+    $("stabilityValue").textContent =
+        Number($("stability").value).toFixed(2);
+
+    $("similarityValue").textContent =
+        Number($("similarity").value).toFixed(2);
+}
+
+["speed", "stability", "similarity"].forEach(id => {
+    $(id).addEventListener("input", updateRanges);
+});
+
+function voiceLanguage(voice) {
+    const labels = voice.labels || {};
+    return String(
+        labels.language || labels.accent || ""
+    ).toLowerCase();
+}
+
+function renderVoices() {
+    const filter = $("languageFilter").value;
+
+    const filtered = voices.filter(voice => {
+        if (filter === "all") return true;
+
+        const language = voiceLanguage(voice);
+        const name = voice.name.toLowerCase();
+
+        if (filter === "en") {
+            return language.includes("english") ||
+                   language.includes("american") ||
+                   language.includes("british");
+        }
+
+        if (filter === "ar") {
+            return language.includes("arabic") ||
+                   name.includes("arabic");
+        }
+
+        return language.includes(filter);
+    });
+
+    const select = $("voiceSelect");
+    select.innerHTML = "";
+
+    if (!filtered.length) {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "No matching voices";
+        select.appendChild(option);
+        return;
+    }
+
+    filtered.forEach(voice => {
+        const option = document.createElement("option");
+        option.value = voice.voice_id;
+
+        const accent = voice.labels?.accent || "";
+        option.textContent = accent
+            ? voice.name + " - " + accent
+            : voice.name;
+
+        select.appendChild(option);
+    });
+}
+
+async function loadVoices() {
+    try {
+        const response = await fetch("/api/voices");
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Could not load voices.");
+        }
+
+        voices = data.voices || [];
+        renderVoices();
+
+        $("connection").textContent =
+            "ELEVENLABS CONNECTED";
+
+        if (voices.length === 0) {
+            setMessage("No voices found in your account.");
+        } else {
+            setMessage(voices.length + " voices loaded.");
+        }
+
+    } catch (error) {
+        $("connection").textContent = "CONNECTION ERROR";
+        setMessage(error.message);
+    }
+}
+
+$("languageFilter").addEventListener("change", renderVoices);
+
+$("previewVoice").addEventListener("click", () => {
+    const id = $("voiceSelect").value;
+    const voice = voices.find(item => item.voice_id === id);
+
+    if (!voice || !voice.preview_url) {
+        setMessage("No preview available for this voice.");
+        return;
+    }
+
+    if (currentAudio) currentAudio.pause();
+
+    currentAudio = new Audio(voice.preview_url);
+    currentAudio.play().catch(() => {
+        setMessage("Could not play voice preview.");
+    });
+});
+
+function addHistory(name, text, url) {
+    let history = JSON.parse(
+        localStorage.getItem("yosha_history") || "[]"
+    );
+
+    history.unshift({
+        name,
+        text: text.slice(0, 120),
+        url,
+        date: new Date().toLocaleString()
+    });
+
+    history = history.slice(0, 10);
+
+    localStorage.setItem(
+        "yosha_history",
+        JSON.stringify(history)
+    );
+
+    renderHistory();
+}
+
+function renderHistory() {
+    const history = JSON.parse(
+        localStorage.getItem("yosha_history") || "[]"
+    );
+
+    const area = $("history");
+    area.innerHTML = "";
+
+    if (!history.length) {
+        area.textContent = "No recent generations yet.";
+        return;
+    }
+
+    history.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "history-item";
+
+        const details = document.createElement("div");
+        details.className = "history-text";
+
+        const title = document.createElement("strong");
+        title.textContent = item.name;
+
+        const description = document.createElement("p");
+        description.textContent = item.text;
+
+        details.append(title, description);
+
+        const link = document.createElement("a");
+        link.href = item.url;
+        link.download = "yosha-voice.mp3";
+        link.textContent = "DOWNLOAD";
+
+        div.append(details, link);
+        area.appendChild(div);
+    });
+}
+
+$("generateButton").addEventListener("click", async () => {
+    const text = $("textInput").value.trim();
+    const voiceId = $("voiceSelect").value;
+
+    if (!text) {
+        setMessage("Please enter your script first.");
+        return;
+    }
+
+    if (!voiceId) {
+        setMessage("Please select an available voice.");
+        return;
+    }
+
+    const button = $("generateButton");
+    button.disabled = true;
+    button.textContent = "GENERATING...";
+
+    setMessage("Connecting to ElevenLabs AI...");
+
+    try {
+        const response = await fetch("/api/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                text,
+                voice_id: voiceId,
+                model_id: $("modelSelect").value,
+                speed: Number($("speed").value),
+                stability: Number($("stability").value),
+                similarity_boost: Number($("similarity").value)
+            })
+        });
+
+        if (!response.ok) {
+            let error = {};
+
+            try {
+                error = await response.json();
+            } catch (_) {}
+
+            throw new Error(
+                error.error || "Voice generation failed."
+            );
+        }
+
+        const audioBlob = await response.blob();
+
+        if (!audioBlob.size) {
+            throw new Error("The audio file is empty.");
+        }
+
+        if (currentAudioURL) {
+            URL.revokeObjectURL(currentAudioURL);
+        }
+
+        currentAudioURL = URL.createObjectURL(audioBlob);
+
+        const selectedVoice = voices.find(
+            item => item.voice_id === voiceId
+        );
+
+        const voiceName = selectedVoice
+            ? selectedVoice.name
+            : "YOSHA AI Voice";
+
+        $("audioArea").innerHTML = "";
+
+        const box = document.createElement("div");
+        box.className = "audio-box";
+
+        const title = document.createElement("strong");
+        title.textContent = "YOUR GENERATED VOICE";
+
+        const player = document.createElement("audio");
+        player.controls = true;
+        player.src = currentAudioURL;
+
+        const download = document.createElement("a");
+        download.href = currentAudioURL;
+        download.download = "YOSHA-VOICE-" +
+            Date.now() + ".mp3";
+        download.textContent = "DOWNLOAD MP3";
+        download.style.display = "block";
+        download.style.color = "#e5bd70";
+        download.style.marginTop = "15px";
+        download.style.textDecoration = "none";
+        download.style.fontSize = "13px";
+
+        box.append(title, player, download);
+        $("audioArea").appendChild(box);
+
+        addHistory(voiceName, text, currentAudioURL);
+
+        setMessage("VOICE GENERATED SUCCESSFULLY.");
+
+    } catch (error) {
+        setMessage(error.message);
+    } finally {
+        button.disabled = false;
+        button.textContent = "GENERATE AI VOICE";
+    }
+});
+
+$("clearHistory").addEventListener("click", () => {
+    localStorage.removeItem("yosha_history");
+    renderHistory();
+});
+
+async function initialize() {
+    updateCounter();
+    updateRanges();
+    renderHistory();
+
+    try {
+        const response = await fetch("/api/status");
+        const data = await response.json();
+
+        if (!data.configured) {
+            $("connection").textContent = "API KEY MISSING";
+            setMessage("Configure your ElevenLabs API key on the server.");
+            return;
+        }
+
+        await loadVoices();
+
+    } catch (_) {
+        $("connection").textContent = "SERVER OFFLINE";
+        setMessage("The YOSHA server is not running.");
+    }
+}
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js")
+            .catch(error => console.log(error));
+    });
+}
+
+initialize();
+</script>
+
+</body>
+</html>
