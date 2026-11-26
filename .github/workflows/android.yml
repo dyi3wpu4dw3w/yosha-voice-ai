@@ -35,8 +35,16 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm install
 
+      - name: Generate YOSHA brand assets
+        run: |
+          python -m pip install Pillow
+          python scripts/generate_brand_assets.py
+
       - name: Generate Android project
         run: npx cap add android
+
+      - name: Generate native launcher and splash assets
+        run: npx capacitor-assets generate --android
 
       - name: Sync web assets and native plugins
         run: npx cap sync android
@@ -64,5 +72,6 @@ jobs:
           path: |
             android/app/build/outputs/apk/debug/*.apk
             android/app/build/outputs/bundle/release/*.aab
+            assets/icon-only.png
           if-no-files-found: error
           retention-days: 14
