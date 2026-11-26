@@ -1,0 +1,13 @@
+{
+  "appId": "com.yosha.voiceai",
+  "appName": "YOSHA VOICE AI",
+  "webDir": "public",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": true
+  }
+}
